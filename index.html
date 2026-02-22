@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TECH PULSE 2026 | Department of Information Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+
+
+.whatsapp-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #25D366;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.qr-section img {
+  width: 150px;
+  margin-top: 8px;
+}
+.insta-section {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.insta-section p {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.insta-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.insta-icon {
+  width: 45px;
+  transition: 0.3s ease;
+}
+
+.insta-icon:hover {
+  transform: scale(1.15);
+}
+
+.insta-name {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #E1306C;
+  letter-spacing: 1px;
+}
+  :root {
+    --neon-cyan: #00f5ff;
+    --neon-green: #00ff88;
+    --neon-purple: #bf00ff;
+    --dark-bg: #030810;
+    --darker: #010508;
+    --card-bg: rgba(0, 245, 255, 0.03);
+    --border: rgba(0, 245, 255, 0.15);
+    --text: #c8e8ff;
+    --glow: 0 0 20px rgba(0, 245, 255, 0.4);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  #matrix-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+    z-index: 999;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100vh; }
+  }
+
+  #intro {
+    position: fixed;
+    inset: 0;
+    background: var(--darker);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: introFade 0.8s ease 3.2s forwards;
+    pointer-events: none;
+  }
+
+  @keyframes introFade {
+    to { opacity: 0; visibility: hidden; pointer-events: none; }
+  }
+
+  .intro-dept {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(0.7rem, 2vw, 1rem);
+    letter-spacing: 0.3em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+
+  .intro-presents {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.2s forwards;
+    text-shadow: 0 0 30px rgba(0,245,255,0.6);
+  }
+
+  .intro-bar {
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan), var(--neon-green));
+    margin-top: 16px;
+    animation: barExpand 0.8s ease 2s forwards;
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+
+  @keyframes barExpand { to { width: 300px; } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-dept {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(0.65rem, 1.5vw, 0.9rem);
+    letter-spacing: 0.4em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 3.8s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, #fff 0%, var(--neon-cyan) 40%, var(--neon-green) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 4.0s forwards;
+    filter: drop-shadow(0 0 30px rgba(0,245,255,0.3));
+  }
+
+  .hero-year {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1rem, 3vw, 2rem);
+    color: var(--neon-purple);
+    letter-spacing: 0.5em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 4.2s forwards;
+    text-shadow: 0 0 20px var(--neon-purple);
+  }
+
+  .hero-tagline {
+    margin-top: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    color: rgba(200,232,255,0.5);
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 4.4s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 5s forwards;
+  }
+
+  .scroll-hint span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(0,245,255,0.4);
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--neon-cyan);
+    border-bottom: 2px solid var(--neon-cyan);
+    transform: rotate(45deg);
+    animation: arrowBounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes arrowBounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50% { transform: rotate(45deg) translateY(6px); }
+  }
+
+  section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .event-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .event-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .event-card:hover {
+    border-color: rgba(0,245,255,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,245,255,0.08), var(--glow);
+    background: rgba(0,245,255,0.06);
+  }
+
+  .event-card:hover::before { opacity: 1; }
+
+  .event-icon {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .event-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .event-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(200,232,255,0.5);
+    letter-spacing: 0.1em;
+  }
+
+  .event-num {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(0,245,255,0.2);
+  }
+
+  .instructions-box {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    position: relative;
+    background: var(--card-bg);
+    overflow: hidden;
+  }
+
+  .instructions-box::before {
+    content: '// IMPORTANT';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--neon-green);
+    opacity: 0.6;
+  }
+
+  .instructions-box::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-green), transparent);
+  }
+
+  .inst-line {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: rgba(200,232,255,0.75);
+    margin-bottom: 10px;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .inst-line::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--neon-green);
+  }
+
+  .inst-highlight {
+    color: var(--neon-cyan);
+    font-weight: bold;
+  }
+
+  .form-section { padding-bottom: 100px; }
+
+  .form-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-box::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-green));
+  }
+
+  .form-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .form-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(0,245,255,0.5);
+    letter-spacing: 0.2em;
+    margin-bottom: 32px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+  }
+
+  input, select {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(0,245,255,0.2);
+    border-radius: 2px;
+    padding: 12px 14px;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f5ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  select option { background: #030810; }
+
+  input:focus, select:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 12px rgba(0,245,255,0.2);
+  }
+
+  input::placeholder { color: rgba(200,232,255,0.2); }
+
+  .submit-btn {
+    margin-top: 28px;
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    border-radius: 2px;
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--neon-cyan);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+
+  .submit-btn:hover {
+    color: #000;
+    box-shadow: 0 0 30px rgba(0,245,255,0.3);
+  }
+
+  .submit-btn:hover::before { transform: scaleX(1); }
+
+  #success-msg {
+    display: none;
+    margin-top: 20px;
+    padding: 16px 20px;
+    border: 1px solid var(--neon-green);
+    border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--neon-green);
+    background: rgba(0,255,136,0.05);
+    text-align: center;
+  }
+
+  #error-msg {
+    display: none;
+    margin-top: 20px;
+    padding: 16px 20px;
+    border: 1px solid #ff4444;
+    border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: #ff4444;
+    background: rgba(255,68,68,0.05);
+    text-align: center;
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(200,232,255,0.2);
+    letter-spacing: 0.2em;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes glitch {
+    0%, 100% { clip-path: none; transform: none; }
+    20% { clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%); transform: translateX(-2px); }
+    40% { clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%); transform: translateX(2px); }
+    60% { clip-path: none; transform: none; }
+  }
+
+  .hero-title:hover { animation: glitch 0.4s ease; }
+
+  .particle {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) translateX(60px); opacity: 0; }
+  }
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Box */
+.modal-box {
+  background: #111;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  border: 2px solid #25D366;
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+/* Green Glow Animation */
+@keyframes glowPulse {
+  from {
+    box-shadow: 0 0 10px #25D366;
+  }
+  to {
+    box-shadow: 0 0 25px #25D366;
+  }
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #25D366;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 12px;
+}
+
+.qr-section img {
+  width: 150px;
+  margin-top: 10px;
+}
+
+.close-btn {
+  margin-top: 15px;
+  padding: 6px 12px;
+  background: #222;
+  color: #25D366;
+  border: 1px solid #25D366;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="intro">
+  <div class="intro-dept">Department of Information Technology presents</div>
+  <div class="intro-presents">one - Day Tech Event</div>
+  <div class="intro-bar"></div>
+</div>
+
+<div class="page">
+  <div class="hero">
+    <div class="hero-dept">Department of Information Technology presents</div>
+    <div class="hero-title">TECH PULSE</div>
+    <div class="hero-year">2 0 2 6</div>
+    <div class="hero-tagline">// WHERE BYTES MEET BRILLIANCE //</div>
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-label">01 &mdash; Events</div>
+    <div class="section-title">Event Lineup</div>
+    <div class="events-grid">
+      <div class="event-card">
+        <span class="event-num">E-01</span>
+        <span class="event-icon">🖼️</span>
+        <div class="event-name">Pixel Recall</div>
+        <div class="event-sub">Logo Guessing</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-02</span>
+        <span class="event-icon">⚡</span>
+        <div class="event-name">Byte Battle</div>
+        <div class="event-sub">Tech Quiz</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-03</span>
+        <span class="event-icon">🔮</span>
+        <div class="event-name">Code Predict</div>
+        <div class="event-sub">Guess the Output</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-04</span>
+        <span class="event-icon">⌨️</span>
+        <div class="event-name">Type Sprint</div>
+        <div class="event-sub">Speed Typing</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-05</span>
+        <span class="event-icon">🧠</span>
+        <div class="event-name">Mind Mesh</div>
+        <div class="event-sub">Riddle Challenge</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-06</span>
+        <span class="event-icon">✏️</span>
+        <div class="event-name">Scribble Storm</div>
+        <div class="event-sub">Draw &amp; Guess</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-07</span>
+        <span class="event-icon">🐛</span>
+        <div class="event-name">Bug Busters</div>
+        <div class="event-sub">Debugging</div>
+      </div>
+      <div class="event-card">
+        <span class="event-num">E-08</span>
+        <span class="event-icon">🤖</span>
+        <div class="event-name">Prompt Wars</div>
+        <div class="event-sub">AI Prompting</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">02 &mdash; Instructions</div>
+    <div class="section-title">Participant Guidelines</div>
+    <div class="instructions-box">
+      <div class="inst-line">Registration is <span class="inst-highlight">mandatory</span> to participate in any event.</div>
+      <div class="inst-line">Once registered, you are eligible to participate in <span class="inst-highlight">all 8 events</span>.</div>
+      <div class="inst-line">Certificates, prizes &amp; perks will be awarded <span class="inst-highlight">only to participants who complete all events</span>.</div>
+      <div class="inst-line">Ensure your Roll Number and Email ID are entered <span class="inst-highlight">accurately</span>.</div>
+      <div class="inst-line">Each student can register <span class="inst-highlight">only once</span>. Duplicate entries will be disqualified.</div>
+      <div class="inst-line">Event timings and venue details will be communicated via your <span class="inst-highlight">registered email</span>.</div>
+      <div class="inst-line">This is a <span class="inst-highlight">one-day event</span> — be present for the full duration.</div>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="section-label">03 &mdash; Register</div>
+    <div class="section-title">Initialize Registration</div>
+    <div class="form-box">
+      <div class="form-title">PARTICIPANT REGISTRATION</div>
+      <div class="form-subtitle">// FILL ALL FIELDS TO PROCEED //</div>
+
+      <form id="reg-form" onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="entry.NAME_ENTRY" placeholder="Enter your full name" required />
+          </div>
+          <div class="form-group">
+            <label for="roll">Roll Number</label>
+            <input type="text" id="roll" name="entry.ROLL_ENTRY" placeholder="e.g. 22IT001" required />
+          </div>
+          <div class="form-group">
+            <label for="email">College Email ID</label>
+            <input type="email" id="email" name="entry.EMAIL_ENTRY" placeholder="your@college.edu" required />
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="entry.MOBILE_ENTRY" inputmode="numeric" placeholder="10-digit number" pattern="[0-9]{10}" required />
+          </div>
+          <div class="form-group">
+            <label for="branch">Branch</label>
+            <select id="branch" name="entry.BRANCH_ENTRY" required>
+              <option value="" disabled selected>Select your branch</option>
+              <option>IT</option>
+              <option>CSE</option>
+              <option>CSE AI-ML</option>
+              <option>CSE DS</option>
+              <option>ECE</option>
+              <option>EEE</option>
+              <option>MECH</option>
+              <option>CIVIL</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="year">Year of Study</label>
+            <select id="year" name="entry.YEAR_ENTRY" required>
+              <option value="" disabled selected>Select year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">⟶ &nbsp; SUBMIT REGISTRATION</button>
+        <div id="success-msg">✔ REGISTRATION COMPLETE — Check your email for confirmation.</div>
+        <div id="error-msg">✖ SUBMISSION FAILED — Please try again.</div>
+      </form>
+<!-- SUCCESS MODAL -->
+<div id="success-modal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <h2 id="success-title">🎉 Registration Successful!</h2>
+    <p id="student-message"></p>
+<p id="countdown-text" style="margin-top:10px; font-size:14px; opacity:0.8;">
+Redirecting to WhatsApp in <span id="countdown">3</span> seconds...
+</p>
+    <a href="https://chat.whatsapp.com/IvKc8cTJGh1G1XnHx3deNW" target="_blank" class="whatsapp-btn">
+      Join WhatsApp Group
+    </a>
+
+    <div class="qr-section">
+      <p>Or scan QR to join</p>
+      <img src="https://image2url.com/r2/default/images/1771752405623-d65961ed-703d-4502-a08b-011edbdfdf29.jpeg" alt="WhatsApp QR">
+    </div>
+
+    <button onclick="closeModal()" class="close-btn">Close</button>
+  </div>
+</div>
+<!-- Instagram Section -->
+<div class="insta-section">
+  <p>Follow us for updates</p>
+  
+  <a href="https://www.instagram.com/jbrec_it?igsh=MTVjbWh0ZWY1MzM3bw==" target="_blank" class="insta-link">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" 
+         alt="Instagram"
+         class="insta-icon">
+         
+    <span class="insta-name">JBREC_IT</span>
+  </a>
+</div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 &nbsp;|&nbsp; TECH PULSE &nbsp;|&nbsp; DEPARTMENT OF INFORMATION TECHNOLOGY &nbsp;|&nbsp; ALL RIGHTS RESERVED
+  </footer>
+</div>
+
+<script>
+let whatsappTimer;
+  // ================= MATRIX RAIN =================
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,./<>?';
+  const fontSize = 13;
+  let cols = Math.floor(canvas.width / fontSize);
+  let drops = Array(cols).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(3,8,16,0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#00f5ff';
+    ctx.font = fontSize + 'px monospace';
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+  }
+  setInterval(drawMatrix, 45);
+
+  window.addEventListener('resize', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols = Math.floor(canvas.width / fontSize);
+    drops = Array(cols).fill(1);
+  });
+
+  // ================= FLOATING PARTICLES =================
+  function createParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 5) + 's';
+    p.style.width = p.style.height = (Math.random() > 0.5 ? 2 : 1) + 'px';
+    if (Math.random() > 0.7) p.style.background = '#00ff88';
+    if (Math.random() > 0.85) p.style.background = '#bf00ff';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 20000);
+  }
+  setInterval(createParticle, 600);
+
+  // ================= GOOGLE SHEETS INTEGRATION =================
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9GtYaI2SvsdxO5Z-Cp9J_sqZNWIprUkFeaD8uo6vBMyWOHQjWiu23g3FPzmzQAIp3/exec";
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const form = document.getElementById('reg-form');
+    const btn = form.querySelector('.submit-btn');
+    const successMsg = document.getElementById('success-msg');
+    const errorMsg = document.getElementById('error-msg');
+
+    // Hide previous messages on each attempt
+    // Hide previous messages on each attempt
+successMsg.style.display = 'none';
+errorMsg.style.display = 'none';
+document.getElementById('success-modal').style.display = 'none';
+
+    const formData = {
+      name:   document.getElementById('name').value.trim(),
+      roll:   document.getElementById('roll').value.trim(),
+      email:  document.getElementById('email').value.trim(),
+      mobile: document.getElementById('mobile').value.trim(),
+      branch: document.getElementById('branch').value,
+      year:   document.getElementById('year').value
+    };
+
+    btn.textContent = "PROCESSING...";
+    btn.disabled = true;
+
+    /*
+     * WHY THIS WORKS:
+     * mode:"no-cors" avoids CORS preflight so the browser sends the request.
+     * The response will be "opaque" (we can't read it), but the request
+     * DOES reach Apps Script and data IS saved + email IS sent.
+     * We simply treat fetch resolving (no network error) as success.
+     * Do NOT call response.ok or response.text() — that throws on opaque responses.
+     */
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+   .then(() => {
+
+  // Get student name BEFORE resetting form
+  const studentName = document.getElementById('name').value.trim();
+
+  document.getElementById('success-msg').style.display = 'block';
+
+  document.getElementById('student-message').innerText =
+    studentName +
+    ", welcome to Tech Pulse 2026 🚀\n\nYou're officially registered! Join the WhatsApp group below for updates.";
+
+  // Show modal
+  document.getElementById('success-modal').style.display = 'flex';
+
+  // --- WhatsApp Auto Redirect Countdown ---
+  let timeLeft = 3;
+  const countdownEl = document.getElementById("countdown");
+  countdownEl.innerText = timeLeft;
+
+  whatsappTimer = setInterval(() => {
+    timeLeft--;
+    countdownEl.innerText = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(whatsappTimer);
+      window.open("https://chat.whatsapp.com/IvKc8cTJGh1G1XnHx3deNW", "_blank");
+    }
+  }, 1000);
+
+  // Reset form
+  form.reset();
+
+  // Restore button
+  btn.textContent = "⟶ SUBMIT REGISTRATION";
+  btn.disabled = false;
+
+})
+    .catch(() => {
+      // Only fires on actual network failure (no internet, DNS error, etc.)
+      errorMsg.style.display = 'block';
+      btn.textContent = "⟶ \u00a0 SUBMIT REGISTRATION";
+      btn.disabled = false;
+    });
+  }
+function closeModal() {
+  document.getElementById('success-modal').style.display = 'none';
+  clearInterval(whatsappTimer);
+}
+</script>
+</body>
+</html>
