@@ -4,6 +4,7 @@
 <meta name="theme-color" content="#030810">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <title>TECH PULSE 2026 | Department of Information Technology</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -863,17 +864,20 @@
 REGISTRATIONS CLOSED
 </button>
 <div class="visitor-counter">
-  👀 Visitors:
-<span id="counter-display">0500</span>
+👥 Visitors: <span id="counter-display">0500</span>+
 </div>
 
+<!-- Hidden real counter -->
+<span id="busuanzi_container_site_pv" style="display:none;">
+<span id="busuanzi_value_site_pv"></span>
+</span>
 
 <div class="live-users">
   👾 ACTIVE USERS ONLINE: <span id="live-users-count">7</span>
 </div>
 
 <!-- Hidden real counter from Busuanzi -->
-<span id="busuanzi_value_site_pv" style="display:none;"></span>
+
         <div id="error-msg">✖ SUBMISSION FAILED — Please try again.</div>
       </form>
 <!-- SUCCESS MODAL -->
@@ -917,7 +921,7 @@ Redirecting to WhatsApp in <span id="countdown">3</span> seconds...
 </div>
 
 <script>
-let whatsappTimer;
+
   // ================= MATRIX RAIN =================
   const canvas = document.getElementById('matrix-canvas');
   const ctx = canvas.getContext('2d');
@@ -1032,10 +1036,10 @@ function animateCounter(target) {
   }, 40);
 }
 
-function startVisitorCounter(){
+function startVisitorCounter() {
   const real = document.getElementById("busuanzi_value_site_pv");
 
-  if(real && real.textContent !== ""){
+  if (real && real.textContent.trim() !== "") {
     const target = 500 + parseInt(real.textContent);
     animateCounter(target);
   } else {
@@ -1043,9 +1047,9 @@ function startVisitorCounter(){
   }
 }
 
-startVisitorCounter();
-
+window.addEventListener("load", () => {
+  setTimeout(startVisitorCounter, 1500);
+});
 </script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
