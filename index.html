@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#030810">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>TECH PULSE 2026 | Department of Information Technology</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
-
-
-.whatsapp-btn {
-  display: inline-block;
-  padding: 10px 18px;
-  background: #25D366;
-  color: #000;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-top: 10px;
+.live-users {
+  margin-top: 20px;
+  font-family: monospace;
+  font-size: 16px;
+  color: #00ff9d;
+  text-shadow: 0 0 10px #00ff9d;
+  letter-spacing: 2px;
+}
+#counter-display{
+  font-family:'Share Tech Mono', monospace;
+  font-size:34px;
+  color:#00ff88;
+  letter-spacing:6px;
+  text-shadow:0 0 10px #00ff88, 0 0 20px #00ff88;
+}
+.visitor-counter{
+  margin-top:20px;
+  text-align:center;
+  font-family:'Orbitron', monospace;
+  font-size:28px;
+  color:#00f5ff;
+  letter-spacing:2px;
+  text-shadow:0 0 10px #00f5ff;
 }
 
-.qr-section img {
-  width: 150px;
-  margin-top: 8px;
+#visit-count{
+  font-size:34px;
+  color:#00ff88;
 }
+
+
+
+
 .insta-section {
   text-align: center;
   margin-top: 25px;
@@ -667,11 +684,8 @@
   border-radius: 6px;
   cursor: pointer;
 }
-.closed-btn {
-  border: 1px solid #ff4444;
-  color: #ff4444;
-  cursor: not-allowed;
-}
+
+
 
 .closed-btn:hover {
   background: #ff4444;
@@ -845,7 +859,21 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="submit-btn closed-btn">REGISTRATIONS CLOSED</button>
+<button type="button" class="submit-btn closed-btn" onclick="handleSubmit(event)">
+REGISTRATIONS CLOSED
+</button>
+<div class="visitor-counter">
+  👀 Visitors:
+<span id="counter-display">0500</span>
+</div>
+
+
+<div class="live-users">
+  👾 ACTIVE USERS ONLINE: <span id="live-users-count">7</span>
+</div>
+
+<!-- Hidden real counter from Busuanzi -->
+<span id="busuanzi_value_site_pv" style="display:none;"></span>
         <div id="error-msg">✖ SUBMISSION FAILED — Please try again.</div>
       </form>
 <!-- SUCCESS MODAL -->
@@ -961,6 +989,12 @@ function closeModal() {
   document.getElementById('success-modal').style.display = 'none';
   clearInterval(whatsappTimer);
 }
+window.onclick = function(e) {
+  const modal = document.getElementById('success-modal');
+  if (e.target === modal) {
+    closeModal();
+  }
+};
 document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("reg-form");
@@ -972,6 +1006,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+function updateLiveUsers() {
+  const el = document.getElementById("live-users-count");
+  const randomUsers = Math.floor(Math.random() * 12) + 3; 
+  el.textContent = randomUsers;
+}
+
+updateLiveUsers();
+setInterval(updateLiveUsers, 4000);
 </script>
+<script>
+function animateCounter(target) {
+  let current = 500;
+  const display = document.getElementById("counter-display");
+
+  const interval = setInterval(() => {
+    current += Math.floor(Math.random() * 3) + 1;
+
+    display.textContent = current.toString().padStart(4,"0");
+
+    if (current >= target) {
+      display.textContent = target.toString().padStart(4,"0");
+      clearInterval(interval);
+    }
+  }, 40);
+}
+
+function startVisitorCounter(){
+  const real = document.getElementById("busuanzi_value_site_pv");
+
+  if(real && real.textContent !== ""){
+    const target = 500 + parseInt(real.textContent);
+    animateCounter(target);
+  } else {
+    setTimeout(startVisitorCounter, 500);
+  }
+}
+
+startVisitorCounter();
+
+</script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
